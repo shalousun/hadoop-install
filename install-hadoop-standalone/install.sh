@@ -54,3 +54,6 @@ hdfs namenode -format
 
 echo "Finish hadoop standalone install"
 
+echo "You could start hadoop server in $HADOOP_HOME/sbin"
+
+
