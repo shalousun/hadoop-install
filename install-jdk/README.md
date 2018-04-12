@@ -1,0 +1,2 @@
+通过shell自动安装在linux、unix操作系统中自动安装jdk,如果需要更改jdk的安装版本和路径请自行修改install-jdk.sh的脚本
+
