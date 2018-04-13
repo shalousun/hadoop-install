@@ -1,6 +1,11 @@
 hive2.3.3的单实例安装，由于hive依赖于hadoop，因此在安装本实例前，请先使用install-hadoop-standalone来
-安装好hadoop 。本实例安装中使用mysql来作为hive matastore的元数据存储，mysql的连接的相关信息在conf/hive-site.xml中。
+安装好hadoop 。由于hive内嵌的 Derby 数据库每次只能访问一个数据文件，这也就意味着它不支持多会话连接，
+因此本实例安装中使用独立mysql来作为hive matastore的元数据存储，mysql的连接的相关信息在conf/hive-site.xml中。
 实际安装是可以根据自己安装的mysql去修改连接信息。
+
+# 安装说明
+只需要将install-hive-standalone下载到linux\unix的宿主机上执行install.sh命令，
+脚本会自动下载hive的安装包和整合mysql存储的jar包，安装完成后即可执行下面文档中的命令。
 
 
 # 启动hive的服务
