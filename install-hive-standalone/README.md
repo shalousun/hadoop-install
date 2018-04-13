@@ -63,6 +63,8 @@ hive> desc formatted student;
 ```
 通过ui页面查看创建的数据位置
 http://xxx:50070/explorer.html#/user/hive/warehouse/db_hive_test.db
+
+界面导航：Utilities->Browse the file system
 ## 通过Mysql查看创建的表
 ```
 mysql> use hive;
