@@ -1,0 +1,1 @@
+hadoop，hive自动安装脚本
