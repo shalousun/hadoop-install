@@ -1,5 +1,6 @@
 hive2.3.3的单实例安装，由于hive依赖于hadoop，因此在安装本实例前，请先使用install-hadoop-standalone来
-安装好hadoop.
+安装好hadoop 。本实例安装中使用mysql来作为hive matastore的元数据存储，mysql的连接的相关信息在conf/hive-site.xml中。
+实际安装是可以根据自己安装的mysql去修改连接信息。
 
 
 # 启动hive的服务
@@ -80,7 +81,6 @@ beeline>!connect jdbc:hive2://localhost:10000/default
 ```
 public static void main(String... arg) {
     String driverName = "org.apache.hive.jdbc.HiveDriver";
-
     try {
         Class.forName(driverName);
     } catch (ClassNotFoundException e) {
