@@ -76,6 +76,11 @@ mysql> select * from TBLS;
 beeline>!connect jdbc:hive2://localhost:10000/default
 ```
 上面会提示输入用户名密码
+## hive端口介绍
+服务 | 端口号|服务描述
+---|---|---
+HiveServer2 Thrift API |10000|提供远程数据连接的接口
+HiveServer2 Web UI | 10002|提供链接记录，操作记录的查询
 
 # 编程测试
 本例安装的hive是2.3.3，因此需要使用hive-jdbc的版本是2.3.3，如果驱动版本不兼容，则可能会出现
