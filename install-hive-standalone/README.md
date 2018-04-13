@@ -87,19 +87,20 @@ public static void main(String... arg) {
         e.printStackTrace();
         System.exit(1);
     }
-
     try{
-    Connection con = DriverManager.getConnection("jdbc:hive2://192.168.248.143:10000/db_hive_test", "", "");
-    Statement stmt = con.createStatement();
+        Connection con = DriverManager.getConnection("jdbc:hive2://192.168.248.143:10000/db_hive_test", "", "");
+        Statement stmt = con.createStatement();
 
-    String sql = "select * from student";
-    System.out.println("Running: " + sql);
-    ResultSet res = stmt.executeQuery(sql);
-    while (res.next()) {
-        System.out.println(String.valueOf(res.getString(1)));
-    }
+        String sql = "select * from student";
+        System.out.println("Running: " + sql);
+        ResultSet res = stmt.executeQuery(sql);
+        while (res.next()) {
+            System.out.println(String.valueOf(res.getString(1)));
+        }
     } catch (SQLException e) {
         e.printStackTrace();
     }
 }
 ```
+# hive可视化客服端
+关于hive的可视化客服端，推荐使用DBeaver，基本只需要使用社区版的就ok了，DBeaver的下载地址https://dbeaver.jkiss.org。
