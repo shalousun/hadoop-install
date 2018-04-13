@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+    <property>
+        <name>hive.metastore.cache.pinobjtypes</name>
+        <value>Table,Database,Type,FieldSchema,Order</value>
+    </property>
+    <!--set driver-->
+    <property>
+        <name>javax.jdo.option.ConnectionDriverName</name>
+        <value>com.mysql.jdbc.Driver</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionUserName</name>
+        <value>root</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionPassword</name>
+        <value>root</value>
+    </property>
+    <property>
+        <name>hive.metastore.warehouse.dir</name>
+        <value>/user/hive/warehouse</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionURL</name>
+        <value>jdbc:mysql://192.168.248.1:3306/hive?createDatabaseIfNotExist=true&amp;useSSL=false</value>
+    </property>
+    <property>
+        <name>datanucleus.autoStartMechanism</name>
+        <value>SchemaTable</value>
+    </property>
+    <property>
+        <name>hive.server2.authentication</name>
+        <value>NONE</value>
+        <description>
+            Expects one of [nosasl, none, ldap, kerberos, pam, custom].
+            Client authentication types.
+            NONE: no authentication check
+            LDAP: LDAP/AD based authentication
+            KERBEROS: Kerberos/GSSAPI authentication
+            CUSTOM: Custom authentication provider
+            (Use with property hive.server2.custom.authentication.class)
+            PAM: Pluggable authentication module
+            NOSASL:  Raw transport
+        </description>
+    </property>
+</configuration>

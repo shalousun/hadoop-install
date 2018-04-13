@@ -27,4 +27,14 @@
         <value>/usr/local/hadoop/custom/tmp</value>
         <description>had tmp file on namenode</description>
     </property>
+    <property>
+        <name>hadoop.proxyuser.hadoop.groups</name>
+        <value>*</value>
+        <description>Allow the superuser oozie to impersonate any members of the group group1 and group2</description>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.hadoop.hosts</name>
+        <value>*</value>
+        <description>The superuser can connect only from host1 and host2 to impersonate a user</description>
+    </property>
 </configuration>
