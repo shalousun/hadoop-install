@@ -1,5 +1,6 @@
 #!/bin/bash
-#su - root
+# shell script to install hive
+
 CUR_PATH=$(cd `dirname $0`;pwd)
 
 HIVE_VERSION=2.3.3
@@ -14,7 +15,7 @@ HADOOP_HOME=/usr/local/hadoop
 
 MYSQL_DRIVER_VERSION=5.1.45
 MYSQL_DRIVER=mysql-connector-java-$MYSQL_DRIVER_VERSION.jar
-http://central.maven.org/maven2/mysql/mysql-connector-java/$MYSQL_DRIVER_VERSION/MYSQL_DRIVER
+
 cd /usr/local
 # download hive
 if [ ! -f "$HIVE_NAME_TAR" ]

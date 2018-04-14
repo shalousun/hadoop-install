@@ -1,4 +1,5 @@
 #!/bin/bash
+# shell script to install hadoop
 
 CUR_PATH=$(cd `dirname $0`;pwd)
 
