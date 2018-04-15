@@ -30,6 +30,7 @@ hbase(main):001:0> put 'hivehbase', 'row4', 'ratings:bookid', 'book4'
 hbase(main):001:0> put 'hivehbase', 'row4', 'ratings:rating', '1'
 ```
 3. Hive和HBase表映射
+
 创建一个hive表映射到一个已经存在HBase表，这种情况需要使用EXTERNAL来创建一个外部表
 ```
 CREATE EXTERNAL TABLE hbasehive_table
