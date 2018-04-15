@@ -48,3 +48,35 @@ hdfs://localhost:9000/hbase，那么在hdfs中查看的地址为http://xxx:50070
 ---|---
 HBase's zookeeper | 2181
 HBase Master web UI | 160010
+
+# HBase的数据表基本操作
+1. 创建表添加列族
+```
+# 新建一个 t_user表，添加两个列族 st1 和 st2
+hbase(main):003:0> create 't_user','st1','st2'
+```
+2. 给表添加数据
+```
+添加 主键 、列 和值
+hbase(main):003:0> put 't_user','1001','st1:age','18'
+hbase(main):003:0> put 't_user','1001','st2:name','zhangsan'
+```
+3. 查询表数据
+```
+hbase(main):003:0> scan 't_user'
+```
+4. 查看表结构
+```
+hbase(main):003:0> describe 't_user'
+```
+5. 删除记录
+```
+hbase(main):003:0> delete't_user','1001','st1:age'
+```
+6. 删除表
+```
+# 先删除表首先要屏蔽该表
+hbase(main):003:0> disable 't_user'
+# 删除表
+hbase(main):003:0> drop 't_user'
+```
