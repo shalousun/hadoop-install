@@ -1,1 +1,2 @@
-hadoop，hive自动安装脚本
+JDK、Hadoop、HBase、Hive、Zookeeper、Hive整合HBase的自动化脚本。降低安装的复杂化、减少大量的后续重复工作。
+目前完成测试通过的自动化脚本主要是standalone安装模式，后续会增加集群安装的相关脚本。
