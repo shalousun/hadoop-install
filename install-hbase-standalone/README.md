@@ -39,8 +39,8 @@ hbase(main):010:0> scan 'test'
 
 hbase(main):011:0> get 'test', 'row1'
 ```
-然后我们找到刚开始我们设置的hbase.rootdir文件夹 ，然后 进入里面的hbase.rootdir文件夹下面 可以看到我们创建的两个表test test1。
-
+如果hbase.rootdir配置的是本地路径，则到配置的本地路径的default目录下查看test test1，如果是配置的hadoop hdfs地址则查看,例如配置的地址是
+hdfs://localhost:9000/hbase，那么在hdfs中查看的地址为http://xxx:50070/explorer.html#/hbase/data/default
 
 # hbase 1.3.x服务端口
 
