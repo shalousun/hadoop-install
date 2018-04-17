@@ -47,7 +47,9 @@ hdfs://localhost:9000/hbase，那么在hdfs中查看的地址为http://xxx:50070
 服务 | 端口号
 ---|---
 HBase's zookeeper | 2181
+HBase Master|16000
 HBase Master web UI | 160010
+
 
 # HBase的数据表基本操作
 1. 创建表添加列族
