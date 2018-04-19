@@ -3,7 +3,7 @@
 
 CUR_PATH=$(cd `dirname $0`;pwd)
 
-HADOOP_NAME=hadoop-2.7.5
+HADOOP_NAME=hadoop-2.7.4
 
 HADOOP_NAME_TAR=$HADOOP_NAME.tar.gz
 
@@ -44,10 +44,11 @@ echo "export PATH=\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin" >> /etc/profile
 source /etc/profile
 # ========================replace config============================
 echo "Current work home is $CUR_PATH"
-# copy xml config
-cp $CUR_PATH/conf/*.xml $HADOOP_HOME/etc/hadoop
+# copy config files
+cp $CUR_PATH/conf/* $HADOOP_HOME/etc/hadoop
 # copy
 cp $CUR_PATH/bash/*.sh $HADOOP_HOME/etc/hadoop
+
 
 # ========================Format Hadoop Namenode===================
 echo "Format Hadoop Namenode"
