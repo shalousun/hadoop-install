@@ -15,7 +15,7 @@ start-hbase.sh
 ```
 stop-hbase.sh
 ```
-# HBase状态查看
+# HBase状态查看``
 ```
 hbase shell
 
@@ -82,3 +82,5 @@ hbase(main):003:0> disable 't_user'
 # 删除表
 hbase(main):003:0> drop 't_user'
 ```
+# 参考文档
+1. http://hbase.apache.org/book.html
