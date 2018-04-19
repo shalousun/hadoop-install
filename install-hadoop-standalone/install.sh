@@ -19,15 +19,17 @@ cd /usr/local
 # ========================download hadoop===========================
 if [ ! -f "$HADOOP_NAME_TAR" ]
 then
-  wget http://mirrors.hust.edu.cn/apache/hadoop/common/$HADOOP_NAME/$HADOOP_NAME.tar.gz
+  wget https://archive.apache.org/dist/hadoop/common/$HADOOP_NAME/$HADOOP_NAME.tar.gz
 fi
 
 #extract hadoop
 tar -zxvf $HADOOP_NAME_TAR
 
-#rm -rf $HADOOP_NAME_TAR
+
 # rename hadoop
 mv $HADOOP_NAME hadoop
+
+#rm -rf $HADOOP_NAME_TAR
 
 # ========================create customer data dir==================
 echo "create customer data dir"
