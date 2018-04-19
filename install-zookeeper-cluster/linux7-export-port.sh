@@ -14,7 +14,7 @@ then
         if [ "no" == `sudo firewall-cmd --query-port=$ZOOKEEPER_PORT/tcp` ]
         then
             echo "open $ZOOKEEPER_PORT port"
-            sudo firewall-cmd --permanent --add-port=$ZOOKEEPER_PORT/tcp
+            sudo firewall-cmd --permanent --add-port=2181/tcp
             sudo firewall-cmd --permanent --add-port=2888/tcp
             sudo firewall-cmd --permanent --add-port=3888/tcp
             sudo firewall-cmd --reload

@@ -23,14 +23,16 @@ fi
 # extract zookeeper
 tar -zxvf $ZOOKEEPER_TAR
 
-#rm -ri $ZOOKEEPER_TAR
+# delete tar
+rm -rf $ZOOKEEPER_TAR
 # rename zookeeper
 mv $ZOOKEEPER_NAME zookeeper
 
 cd zookeeper
 # create dir to store data
 mkdir data
-
+# create dir to store logs
+mkdir logs
 # ==============REPLACE CONFIG=============================
 echo "Current work home is $CUR_PATH"
 cp $CUR_PATH/conf/* $ZOOKEEPER_HOME/conf
