@@ -1,6 +1,9 @@
 #!/bin/bash
 # shell script to install jdk
 
+# show line number in vi
+echo "set nu">~/.vimrc
+
 JDK_NAME=jdk-8u161-linux-x64.tar.gz
 
 JDK_DIR=/usr/local/java
