@@ -17,7 +17,7 @@ cd /usr/local
 if [ ! -f "$HBASE_TAR" ]
 then
   echo "download HBase"
-  wget http://mirrors.hust.edu.cn/apache/hbase/$HBASE_VERSION/hbase-$HBASE_VERSION-bin.tar.gz
+  wget https://archive.apache.org/dist/hbase/$HBASE_VERSION/hbase-$HBASE_VERSION-bin.tar.gz
 fi
 
 # extract HBase

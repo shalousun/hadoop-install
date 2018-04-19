@@ -43,7 +43,7 @@
     </property>
     <property>
         <name>hbase.zookeeper.quorum</name>
-        <value>master</value>
+        <value>master,slave1,slave2</value>
     </property>
     <property>
         <name>hbase.zookeeper.property.clientPort</name>
