@@ -17,7 +17,7 @@ cd /usr/local
 if [ ! -f "$ZOOKEEPER_TAR" ]
 then
   echo "download zookeeper"
-  wget http://mirrors.hust.edu.cn/apache/zookeeper/zookeeper-$ZOOKEEPER_VERSION/zookeeper-$ZOOKEEPER_VERSION.tar.gz
+  wget https://archive.apache.org/dist/zookeeper/zookeeper-$ZOOKEEPER_VERSION/zookeeper-$ZOOKEEPER_VERSION.tar.gz
 fi
 
 # extract zookeeper
