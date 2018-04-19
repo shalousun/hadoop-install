@@ -30,7 +30,7 @@ tar -zxvf $JDK_NAME
 mv jdk1.* jdk8
 
 # ===================SET JAVA ENV=====================================
-if ! grep "JAVA_HOME=/usr/local/java/jdk1.8.0_131" /etc/profile
+if ! grep "JAVA_HOME=/usr/local/java/jdk8" /etc/profile
 then
     echo "# set java environment" >> /etc/profile
     echo "export JAVA_HOME=/usr/local/java/jdk8" >> /etc/profile
