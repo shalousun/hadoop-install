@@ -5,6 +5,7 @@ HBase自动安装脚本,脚本适用hbase 1.3.x。
 1. zookeeper是hbase自带的
 2. JAVA_HOME的路径/usr/local/java/jdk8，配置在bash/hbase-env.sh中。
 3. hbase.rootdir的路径配置的hdfs的地址，因此需要先安装hadoop
+
 # 启动停止
 
 启动
@@ -81,6 +82,10 @@ hbase(main):003:0> delete't_user','1001','st1:age'
 hbase(main):003:0> disable 't_user'
 # 删除表
 hbase(main):003:0> drop 't_user'
+```
+7. 扫描前几条
+```
+scan 't1',{LIMIT=>5}
 ```
 # 参考文档
 1. http://hbase.apache.org/book.html
