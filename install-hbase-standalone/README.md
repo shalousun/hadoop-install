@@ -86,7 +86,9 @@ hbase(main):003:0> drop 't_user'
 7. 扫描前几条
 ```
 scan 't1',{LIMIT=>5}
-```
+
+
+
 8. 退出hbase命令
 ```
 quit
@@ -120,6 +122,11 @@ echo "scan 'shortUrl',{COLUMN=>['su:customerId','su:postId'], LIMIT=>10}" | ./hb
 10. 统计表行数
 ```
 hbase(main):003:0> count 'FJTv:DbRecommendResult'
+
 ```
+# HBase的namespace操作
+
+namespace相关请转移到doc目录
+
 # 参考文档
 1. http://hbase.apache.org/book.html
