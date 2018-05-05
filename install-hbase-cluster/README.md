@@ -6,7 +6,7 @@
 ---|---
 HBase's zookeeper | 2181
 HBase Master|16000
-HBase Master web UI | 160010
+HBase Master web UI | 16010
 HRegionServer|16201
 RegionServer web ui|16301
 
@@ -31,4 +31,14 @@ vi /etc/hosts
 配置windows的hosts映射到hbase master宿主机
 ```
 192.168.248.145 master
+```
+
+# 启动集群
+启动hbase集群只需要在master节点上执行启动命令，其他slave节点也会自动启动
+```
+start-hbase.sh
+```
+# 查看hbase集群状态
+```aidl
+http://master:16010
 ```
