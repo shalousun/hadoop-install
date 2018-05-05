@@ -16,7 +16,7 @@ start-hbase.sh
 ```
 stop-hbase.sh
 ```
-# HBase状态查看``
+# HBase状态查看
 ```
 hbase shell
 
@@ -49,7 +49,7 @@ hdfs://localhost:9000/hbase，那么在hdfs中查看的地址为http://xxx:50070
 ---|---
 HBase's zookeeper | 2181
 HBase Master|16000
-HBase Master web UI | 160010
+HBase Master web UI | 16010
 
 
 # HBase的数据表基本操作
@@ -86,6 +86,40 @@ hbase(main):003:0> drop 't_user'
 7. 扫描前几条
 ```
 scan 't1',{LIMIT=>5}
+```
+8. 退出hbase命令
+```
+quit
+```
+9. hbase的数据导入导出
+
+导出到本地
+```
+hbase org.apache.hadoop.hbase.mapreduce.Driver export xyz file:///home/hadoop/
+
+```
+导出到hdfs
+```
+hbase org.apache.hadoop.hbase.mapreduce.Export 'FJTv:DbRecommendResult'  /usr/local/DbRecommendResult
+```
+从本地如数据到hbase
+```
+hbase/bin/hbase org.apache.hadoop.hbase.mapreduce.Driver import zzz file:///home/hadoop/xyz/
+```
+导出指定行数的的数据
+```
+hbase org.apache.hadoop.hbase.mapreduce.Export -Dhbase.mapreduce.scan.row.start=0 
+-Dhbase.mapreduce.scan.row.stop=6 
+"mytable" /export/mytable
+```
+
+用scan导出数据
+```
+echo "scan 'shortUrl',{COLUMN=>['su:customerId','su:postId'], LIMIT=>10}" | ./hbase shell > myText
+```
+10. 统计表行数
+```
+hbase(main):003:0> count 'FJTv:DbRecommendResult'
 ```
 # 参考文档
 1. http://hbase.apache.org/book.html
