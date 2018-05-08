@@ -33,3 +33,14 @@ sbin/start-yarn.sh
 ```
 jps
 ```
+# hadoop系统端口
+
+
+实例 | 端口
+---|---
+HDFS	Namenode | 50070
+HDFS Datanodes | 50075
+HDFS Secondarynamenode | 50090
+HDFS Backup/Checkpoint node*|50105
+MR Jobracker|50030
+MR Tasktrackers|50060
