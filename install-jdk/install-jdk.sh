@@ -8,6 +8,7 @@ JDK_NAME=jdk-8u161-linux-x64.tar.gz
 
 JDK_DIR=/usr/local/java
 
+DOWNLOAD_URL=http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz
 if [ ! -d "$JDK_DIR" ]
 then
  echo "mkdir $JDK_DIR"
@@ -19,7 +20,7 @@ cd $JDK_DIR
 # ===================download oracle jdk=============================
 if [ ! -f "$JDK_NAME" ]
 then
-  wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie;" http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz 
+  wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie;" $DOWNLOAD_URL
 fi
 
 # ===================install jdk=====================================
