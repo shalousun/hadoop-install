@@ -16,7 +16,7 @@ cd /usr/local
 # download zookeeper
 if [ ! -f "$ZOOKEEPER_TAR" ]
 then
-  echo "download zookeeper"
+  echo "INFO: download zookeeper"
   wget https://archive.apache.org/dist/zookeeper/zookeeper-$ZOOKEEPER_VERSION/zookeeper-$ZOOKEEPER_VERSION.tar.gz
 fi
 
@@ -34,7 +34,7 @@ mkdir data
 # create dir to store logs
 mkdir logs
 # ==============REPLACE CONFIG=============================
-echo "Current work home is $CUR_PATH"
+echo "INFO: Current work home is $CUR_PATH"
 cp $CUR_PATH/conf/* $ZOOKEEPER_HOME/conf
 
 # ==============SET ZOOKEEPER ENV==========================
@@ -50,4 +50,4 @@ fi
 echo 1 > $ZOOKEEPER_HOME/data/myid
 
 # ==============EXPORT PORTS==============================
-# echo "Finish install!!!"
+# echo "INFO: Finish install !!!"
