@@ -20,7 +20,7 @@ cd /usr/local
 # ================================download hive======================================
 if [ ! -f "$HIVE_NAME_TAR" ]
 then
-  echo "download hive"
+  echo "INFO: download hive"
   wget http://apache.mirror.globo.tech/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz
 fi
 
@@ -35,7 +35,7 @@ mv $HIVE_NAME hive
 # ===============================download mysql driver===============================
 if [ ! -f "$MYSQL_DRIVER" ]
 then
-   echo "download mysql driver"
+   echo "INFO: download mysql driver"
    wget http://central.maven.org/maven2/mysql/mysql-connector-java/$MYSQL_DRIVER_VERSION/$MYSQL_DRIVER
 fi
 
@@ -53,19 +53,19 @@ fi
 source /etc/profile
 
 # ===============================replace config====================================
-echo "Current work home is $CUR_PATH"
+echo "INFO: Current work home is $CUR_PATH"
 # copy xml config
 cp $CUR_PATH/conf/*.xml $HIVE_HOME/conf
 # copy
 cp $CUR_PATH/bash/*.sh $HIVE_HOME/conf
 
 # ================================making directory for Hive metastore==============
-echo "making directory for Hive metastore"
+echo "INFO: making directory for Hive metastore"
 $HADOOP_HOME/bin/hadoop fs -mkdir -p /user/hive/warehouse
 $HADOOP_HOME/bin/hadoop fs -mkdir -p /tmp/hive/
 hadoop fs -chmod 777 /user/hive/warehouse
 hadoop fs -chmod 777 /tmp/hive
 
 # ===============================initializing metastore=============================
-echo "initializing metastore"
+echo "INFO: initializing metastore"
 ./$HIVE_HOME/bin/schematool -dbType mysql -initSchema
