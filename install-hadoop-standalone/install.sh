@@ -32,7 +32,7 @@ mv $HADOOP_NAME hadoop
 #rm -rf $HADOOP_NAME_TAR
 
 # ========================create customer data dir==================
-echo "create customer data dir"
+echo "INFO: create customer data dir"
 mkdir -p $HADOOP_HOME/custom/tmp
 mkdir -p $HADOOP_HOME/custom/hdfs
 mkdir -p $HADOOP_HOME/custom/hdfs/data
@@ -45,20 +45,20 @@ echo "export PATH=\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin" >> /etc/profile
 
 source /etc/profile
 # ========================replace config============================
-echo "Current work home is $CUR_PATH"
+echo "INFO: Current work home is $CUR_PATH"
 # copy xml config
 cp $CUR_PATH/conf/*.xml $HADOOP_HOME/etc/hadoop
 # copy
 cp $CUR_PATH/bash/*.sh $HADOOP_HOME/etc/hadoop
 
 # ========================Format Hadoop Namenode===================
-echo "Format Hadoop Namenode"
+echo "INFO: Format Hadoop Namenode"
 
 hdfs namenode -format
 
 # =========================Finish install==========================
-echo "Finish hadoop standalone install"
+echo "INFO: Finish hadoop standalone install"
 
-echo "You could start hadoop server in $HADOOP_HOME/sbin"
+echo "INFO: You could start hadoop server in $HADOOP_HOME/sbin"
 
 
