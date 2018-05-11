@@ -16,7 +16,7 @@ cd /usr/local
 # download HBase
 if [ ! -f "$HBASE_TAR" ]
 then
-  echo "download HBase"
+  echo "INFO: download HBase"
   wget https://archive.apache.org/dist/hbase/$HBASE_VERSION/hbase-$HBASE_VERSION-bin.tar.gz
 fi
 
@@ -33,7 +33,7 @@ cd hbase
 mkdir hbaseData
 
 # ==============REPLACE CONFIG=============================
-echo "Current work home is $CUR_PATH"
+echo "INFO: Current work home is $CUR_PATH"
 cp $CUR_PATH/conf/* $HBASE_HOME/conf
 cp $CUR_PATH/bash/* $HBASE_HOME/conf
 
@@ -49,4 +49,4 @@ fi
 
 
 # ==============EXPORT PORTS==============================
-# echo "Finish install!!!"
+# echo "INFO: Finish install !!!"
