@@ -1,2 +1,3 @@
-通过shell自动安装在linux、unix操作系统中自动安装jdk,如果需要更改jdk的安装版本和路径请自行修改install-jdk.sh的脚本
+通过shell自动安装在linux、unix操作系统中自动安装jdk,如果需要更改jdk的安装版本和路径请自行修改install-jdk.sh的脚本，目前JDK的下载都是动态链接，
+脚本中的下载链接需要在安装前从oracle官网拷贝下来替换。
 
