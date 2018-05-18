@@ -3,14 +3,14 @@
 
 SERVERS=(
     master
-    slave1,
+    slave1
     slave2
 )
 
 echo “Starting zk cluster ......”
-for server in $SERVERS
+for server in ${SERVERS[@]}
 do
     echo "INFO: starting ${server}"
-    ssh ${server} "zkServer.sh start"
-    ssh ${server} "zkServer.sh status"
+    ssh root@${server} "$ZOOKEEPER_HOME/bin/zkServer.sh start"
+    ssh root@${server} "$ZOOKEEPER_HOME/bin/zkServer.sh status"
 done

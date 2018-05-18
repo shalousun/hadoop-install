@@ -7,8 +7,8 @@ SERVERS=(
     slave2
 )
 echo "INFO: Stopping zookeeper cluster"
-for server in $SERVERS
+for server in ${SERVERS[@]}
 do
     echo "INFO: stopping $server "
-    ssh $server "zkServer.sh start"
+    ssh root@$server "$ZOOKEEPER_HOME/bin/zkServer.sh stop"
 done
