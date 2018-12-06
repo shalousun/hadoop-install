@@ -127,6 +127,11 @@ hbase(main):003:0> count 'FJTv:DbRecommendResult'
 # HBase的namespace操作
 
 namespace相关请转移到doc目录
-
+# 查询数据
+## 根据rowkey查询
+get <table>,<rowkey>,[<family:column>,....]
+```
+get 'User', 'row2'
+```
 # 参考文档
 1. http://hbase.apache.org/book.html
