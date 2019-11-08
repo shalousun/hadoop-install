@@ -16,7 +16,7 @@
     <!-- Site specific YARN configuration properties -->
     <property>
         <name>yarn.resourcemanager.hostname</name>
-        <value>master</value>
+        <value>{master_domain}</value>
         <description>start resourcemanager on master</description>
     </property>
 
@@ -35,6 +35,6 @@
     </property>
     <property>
         <name>yarn.resourcemanager.zk-address</name>
-        <value>master:2181,slave1:2181,slave2:2181</value>
+        <value>{ZK_ADDRESS}</value>
     </property>
 </configuration>

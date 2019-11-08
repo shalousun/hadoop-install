@@ -19,7 +19,7 @@
 <configuration>
     <property>
         <name>dfs.namenode.http-address</name>
-        <value>master:50070</value>
+        <value>{master_domain}:50070</value>
         <description>namenode http address</description>
     </property>
     <property>
@@ -29,17 +29,17 @@
     </property>
     <property>
         <name>dfs.name.dir</name>
-        <value>/usr/local/hadoop/custom/hdfs/name</value>
+        <value>{DFS_NAME_DIR}</value>
         <description>namenode上存储hdfs名字空间元数据 </description>
     </property>
     <property>
         <name>dfs.data.dir</name>
-        <value>/usr/local/hadoop/custom/hdfs/data</value>
+        <value>{DFS_DATA_DIR}</value>
         <description>datanode上数据块的物理存储位置</description>
     </property>
     <property>
         <name>dfs.replication</name>
-        <value>2</value>
+        <value>{DFS_REPLICATION}</value>
         <description>副本个数，配置默认是3,应小于datanode机器数量</description>
     </property>
 

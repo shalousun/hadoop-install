@@ -19,12 +19,12 @@
 <configuration>
     <property>
         <name>fs.default.name</name>
-        <value>hdfs://master:9000</value>
+        <value>hdfs://{master_domain}:9000</value>
         <description>hdfs url set</description>
     </property>
     <property>
         <name>hadoop.tmp.dir</name>
-        <value>/usr/local/hadoop/custom/tmp</value>
+        <value>{HADOOP_TMP_DIR}</value>
         <description>had tmp file on namenode</description>
     </property>
     <property>
