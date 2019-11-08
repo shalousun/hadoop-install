@@ -7,6 +7,7 @@ hadoop集群安装，手动安装的详细过程参考本模块doc中的文档�
 # 环境要求
 1. jdk(参考install-jdk)
 2. 设置免密登录(参考install-passless)
+3. 安装zookeeper集群
 
 # 修改hosts
 
@@ -18,4 +19,38 @@ echo '
 192.168.248.146   slave2
 '>>/etc/hosts
 
+```
+# 安装配置
+安装前需要修改`install.conf`文件。
+```
+
+# hadoop package home
+HADOOP_PACKAGE_HOME=/usr/local/packages
+
+# hadoop version
+HADOOP_VERSION=3.2.1
+
+# hadoop install dir
+HADOOP_INSTALL_DIR=/usr/local
+
+# java home
+JAVA_HOME=/usr/local/java/jdk8
+
+# zookeeper address
+ZK_ADDRESS=master:2181,slave1:2181,slave2:2181
+
+# hadoop master domain
+MASTER_DOMAIN=master
+
+# had tmp file on namenode,in core-site.xml
+HADOOP_TMP_DIR=/usr/local/hadoop/custom/tmp
+
+# set in hdfs-site.xml
+DFS_NAME_DIR=/usr/local/hadoop/custom/hdfs/name
+
+# set in hdfs-site.xml
+DFS_DATA_DIR=/usr/local/hadoop/custom/hdfs/data
+
+# 副本个数，配置默认是3,应小于datanode机器数量
+DFS_REPLICATION=2
 ```

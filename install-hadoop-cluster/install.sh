@@ -64,23 +64,29 @@ then
 fi
 
 # ========================replace xml config========================
-sed "s/{master_domain}/${MASTER_DOMAIN}/g" $CUR_PATH/conf/core-site.xml
-sed "s/{HADOOP_TMP_DIR}/${HADOOP_TMP_DIR}/g" $CUR_PATH/conf/core-site.xml
-sed "s/{master_domain}/${MASTER_DOMAIN}/g" $CUR_PATH/conf/hdfs-site.xml
-sed "s/{DFS_NAME_DIR}/${DFS_NAME_DIR}/g" $CUR_PATH/conf/hdfs-site.xml
-sed "s/{DFS_DATA_DIR}/${DFS_DATA_DIR}/g" $CUR_PATH/conf/hdfs-site.xml
-sed "s/{DFS_REPLICATION}/${DFS_REPLICATION}/g" $CUR_PATH/conf/hdfs-site.xml
-sed "s/{master_domain}/${MASTER_DOMAIN}/g" $CUR_PATH/conf/yarn-site.xml
-sed "s/{ZK_ADDRESS}/${ZK_ADDRESS}/g" $CUR_PATH/conf/yarn-site.xml
+echo "INFO: replace config in xml"
+HADOOP_TMP_DIR_SED=$(echo ${HADOOP_TMP_DIR} |sed -e 's/\//\\\//g' )
+DFS_NAME_DIR_SED=$(echo ${DFS_NAME_DIR} |sed -e 's/\//\\\//g' )
+DFS_DATA_DIR_SED=$(echo ${DFS_DATA_DIR} |sed -e 's/\//\\\//g' )
+
+sed -i "s/{master_domain}/${MASTER_DOMAIN}/g" $CUR_PATH/conf/core-site.xml
+sed -i "s/{HADOOP_TMP_DIR}/${HADOOP_TMP_DIR_SED}/g" $CUR_PATH/conf/core-site.xml
+sed -i "s/{master_domain}/${MASTER_DOMAIN}/g" $CUR_PATH/conf/hdfs-site.xml
+sed -i "s/{DFS_NAME_DIR}/${DFS_NAME_DIR_SED}/g" $CUR_PATH/conf/hdfs-site.xml
+sed -i "s/{DFS_DATA_DIR}/${DFS_DATA_DIR_SED}/g" $CUR_PATH/conf/hdfs-site.xml
+sed -i "s/{DFS_REPLICATION}/${DFS_REPLICATION}/g" $CUR_PATH/conf/hdfs-site.xml
+sed -i "s/{master_domain}/${MASTER_DOMAIN}/g" $CUR_PATH/conf/yarn-site.xml
+sed -i "s/{ZK_ADDRESS}/${ZK_ADDRESS}/g" $CUR_PATH/conf/yarn-site.xml
 
 # ========================replace config============================
 echo "INFO: Current work home is $CUR_PATH"
 # copy config files
 cp $CUR_PATH/conf/* $HADOOP_HOME/etc/hadoop
-# copy
-cp $CUR_PATH/bash/*.sh $HADOOP_HOME/etc/hadoop
+# copy sh
+#cp $CUR_PATH/bash/*.sh $HADOOP_HOME/etc/hadoop
 
 # ========================Set java env==============================
+echo "INFO: export JAVA_HOME in hadoop-env.sh,yarn-env.sh"
 # export java env in hadoop-env.sh and yarn-env.sh
 sed -i "s/# export JAVA_HOME=.*/export JAVA_HOME=$JAVA_HOME_SED/g" $HADOOP_HOME/etc/hadoop/hadoop-env.sh
 sed -i "s/# export JAVA_HOME=.*/export JAVA_HOME=$JAVA_HOME_SED/g" $HADOOP_HOME/etc/hadoop/yarn-env.sh
