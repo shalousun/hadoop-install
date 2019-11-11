@@ -69,10 +69,6 @@ export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
 ```
 sudo systemctl stop firewalld.service
-```
-#关闭开机启动
-
-```
 sudo systemctl disable firewalld.service
 ```
 
@@ -330,7 +326,30 @@ $ sbin/start-yarn.sh
 ```
 **各节点状态查看**
 
-分别到master、slave1、slave2中使用jps查看服务状态
+分别到master、slave1、slave2中使用jps查看服务状态，实例：
+
+master机器
+```
+[root@master hadoop]# jps
+3202 Jps
+2875 ResourceManager
+2428 NameNode
+```
+slave1机器
+```
+[root@slave1 ~]# jps
+2259 Jps
+2166 NodeManager
+1981 DataNode
+2077 SecondaryNameNode
+```
+slave2机器
+```
+[root@slave2 ~]# jps
+2181 Jps
+2088 NodeManager
+1982 DataNode
+```
 
 **端口管理**
 
@@ -352,9 +371,11 @@ $ sbin/start-yarn.sh
 ```
 
 
-**浏览访问hdfs**
+**浏览访问hdfs和yarn**
 
-http://192.168.248.128:50070
+hdfs: http://{master ip}:50070
+
+yarn: http://{master ip}:8088
 
 **启动单个进程**
 

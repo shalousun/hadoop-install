@@ -94,7 +94,12 @@ sed -i "s/# export JAVA_HOME=.*/export JAVA_HOME=$JAVA_HOME_SED/g" $HADOOP_HOME/
 echo "INFO: Format Hadoop Namenode"
 
 #hdfs namenode -format
-
+# =============================================EXPORT PORTS==================================
+# echo "INFO: Finish install !!!"
+sudo firewall-cmd --permanent --add-port=8088/tcp
+sudo firewall-cmd --permanent --add-port=8042/tcp
+sudo firewall-cmd --permanent --add-port=50070/tcp
+sudo firewall-cmd --reload
 # =========================Finish install===========================
 echo "INFO: Finish hadoop standalone install"
 echo "INFO: You could start hadoop server in $HADOOP_HOME/sbin"
