@@ -1,4 +1,4 @@
-hadoop分布式完全分布式安装
+hadoop分布式完全分布式安装(hadoop 3.0+)
 
 # 1.集群规划
 
@@ -258,7 +258,31 @@ slave1
 # cd /usr/local/hadoop
 # mkdir tmp name data
 ```
-10. 复制到其他主机
+10. 配置workers文件
+   
+在workers文件中增加从节点地址（若配置了hosts，可直接使用主机名，亦可用IP地址）
+
+```
+slave1
+slave2
+```
+11. 配置启动脚本，添加HDFS和Yarn权限
+    
+添加HDFS权限：编辑如下脚本，在第二行空白位置添加HDFS权限。编辑sbin/start-dfs.sh,sbin/stop-dfs.sh。
+```
+HDFS_DATANODE_USER=root
+HDFS_DATANODE_SECURE_USER=hdfs
+HDFS_NAMENODE_USER=root
+HDFS_SECONDARYNAMENODE_USER=root
+```
+
+添加Yarn权限：编辑如下脚本，在第二行空白位置添加Yarn权限，编辑sbin/start-yarn.sh，sbin/stop-yarn.sh 
+```
+YARN_RESOURCEMANAGER_USER=root
+HDFS_DATANODE_SECURE_USER=yarn
+YARN_NODEMANAGER_USER=root
+```
+12. 复制到其他主机
 
 复制/etc/hosts(因为少了这个导致secondarynamenode总是在slave1启动不起来)
 
