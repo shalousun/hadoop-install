@@ -5,9 +5,7 @@ hadoop分布式完全分布式安装(hadoop 3.0+)
 机器名称|角色|详细信息
 ---|---|---
 192.168.248.128|master|hadoop namenode ressourcemanager
-
 192.168.248.130|slave1|hadoop datanode secondnamenode
-
 192.168.248.133|slave2|hadoop datanade
 
 **注意：** 这里提供的是三个机器的完全分布式，如果需要更多的机器，多的机器也是作为`datanode`使用。
