@@ -24,7 +24,7 @@
     </property>
     <property>
         <name>dfs.namenode.secondary.http-address</name>
-        <value>slave1:50090</value>
+        <value>{SECONDARY_NAME_NODE}:50090</value>
         <description>secondarynamenode http address</description>
     </property>
     <property>

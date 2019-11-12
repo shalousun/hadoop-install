@@ -1,12 +1,14 @@
 #!/bin/bash
 # shell script to install hadoop
 
+CUR_PATH=$(cd `dirname $0`;pwd)
+# =======================remove ^M==================================
+sed -i "s/$(echo -e '\015')/\n/g" ${CUR_PATH}/install.conf
+sed -i "s/$(echo -e '\015')/\n/g" ${CUR_PATH}/slaves.conf
 # =======================load config ===============================
 source ./install.conf
-
+node_ip_arr=$(cat slaves.conf)
 # =======================set variables==============================
-
-CUR_PATH=$(cd `dirname $0`;pwd)
 
 HADOOP_VERSION=${HADOOP_VERSION}
 
@@ -52,7 +54,7 @@ echo "INFO: create customer data dir"
 mkdir -p $HADOOP_HOME/custom/tmp
 mkdir -p $HADOOP_HOME/custom/hdfs
 mkdir -p $HADOOP_HOME/custom/hdfs/data
-mkdir -p  $HADOOP_HOME/custom/hdfs/name
+mkdir -p $HADOOP_HOME/custom/hdfs/name
 
 # ========================set hadoop env============================
 if ! grep "set hadoop environment" /etc/profile
@@ -62,7 +64,14 @@ then
     echo "export PATH=\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin" >> /etc/profile
     source /etc/profile
 fi
+# ========================init worker===============================
+# delete old workers
+rm -rf workers
 
+for node_ip in $node_ip_arr
+do
+  echo "${node_ip}">> $CUR_PATH/conf/workers
+done
 # ========================replace xml config========================
 echo "INFO: replace config in xml"
 HADOOP_TMP_DIR_SED=$(echo ${HADOOP_TMP_DIR} |sed -e 's/\//\\\//g' )
@@ -75,6 +84,7 @@ sed -i "s/{master_domain}/${MASTER_DOMAIN}/g" $CUR_PATH/conf/hdfs-site.xml
 sed -i "s/{DFS_NAME_DIR}/${DFS_NAME_DIR_SED}/g" $CUR_PATH/conf/hdfs-site.xml
 sed -i "s/{DFS_DATA_DIR}/${DFS_DATA_DIR_SED}/g" $CUR_PATH/conf/hdfs-site.xml
 sed -i "s/{DFS_REPLICATION}/${DFS_REPLICATION}/g" $CUR_PATH/conf/hdfs-site.xml
+sed -i "s/{SECONDARY_NAME_NODE}/${SECONDARY_NAME_NODE}/g" $CUR_PATH/conf/hdfs-site.xml
 sed -i "s/{master_domain}/${MASTER_DOMAIN}/g" $CUR_PATH/conf/yarn-site.xml
 sed -i "s/{ZK_ADDRESS}/${ZK_ADDRESS}/g" $CUR_PATH/conf/yarn-site.xml
 
@@ -89,17 +99,23 @@ cp $CUR_PATH/conf/* $HADOOP_HOME/etc/hadoop
 echo "INFO: export JAVA_HOME in hadoop-env.sh,yarn-env.sh"
 # export java env in hadoop-env.sh and yarn-env.sh
 sed -i "s/# export JAVA_HOME=.*/export JAVA_HOME=$JAVA_HOME_SED/g" $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+echo "export HDFS_DATANODE_USER=root">> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+echo "export HDFS_NAMENODE_USER=root">> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+echo "export HDFS_SECONDARYNAMENODE_USER=root">> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
 sed -i "s/# export JAVA_HOME=.*/export JAVA_HOME=$JAVA_HOME_SED/g" $HADOOP_HOME/etc/hadoop/yarn-env.sh
 # ========================Format Hadoop Namenode====================
 echo "INFO: Format Hadoop Namenode"
 
 #hdfs namenode -format
-# =============================================EXPORT PORTS==================================
+# ========================EXPORT PORTS==============================
 # echo "INFO: Finish install !!!"
 sudo firewall-cmd --permanent --add-port=8088/tcp
 sudo firewall-cmd --permanent --add-port=8042/tcp
 sudo firewall-cmd --permanent --add-port=50070/tcp
 sudo firewall-cmd --reload
+# =========================stop firewall============================
+sudo systemctl stop firewalld.service
+sudo systemctl disable firewalld.service
 # =========================Finish install===========================
 echo "INFO: Finish hadoop standalone install"
 echo "INFO: You could start hadoop server in $HADOOP_HOME/sbin"
