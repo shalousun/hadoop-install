@@ -7,7 +7,7 @@ sed -i "s/$(echo -e '\015')/\n/g" ${CUR_PATH}/install.conf
 sed -i "s/$(echo -e '\015')/\n/g" ${CUR_PATH}/slaves.conf
 # =======================load config ===============================
 source ./install.conf
-node_ip_arr=$(cat slaves.conf)
+node_ip_arr=$(cat nodes.conf)
 # =======================set variables==============================
 
 HADOOP_VERSION=${HADOOP_VERSION}
@@ -51,10 +51,9 @@ mv $HADOOP_NAME hadoop
 # rm -rf $HADOOP_NAME_TAR
 # ========================create customer data dir==================
 echo "INFO: create customer data dir"
-mkdir -p $HADOOP_HOME/custom/tmp
-mkdir -p $HADOOP_HOME/custom/hdfs
-mkdir -p $HADOOP_HOME/custom/hdfs/data
-mkdir -p $HADOOP_HOME/custom/hdfs/name
+sudo mkdir -p ${DFS_NAME_DIR}
+sudo mkdir -p ${HADOOP_TMP_DIR}
+sudo mkdir -p ${DFS_DATA_DIR}
 
 # ========================set hadoop env============================
 if ! grep "set hadoop environment" /etc/profile
@@ -72,28 +71,27 @@ for node_ip in $node_ip_arr
 do
   echo "${node_ip}">> $CUR_PATH/conf/workers
 done
+
+# ========================replace config============================
+echo "INFO: Current work home is $CUR_PATH"
+# copy config files
+cp $CUR_PATH/conf/* $HADOOP_HOME/etc/hadoop
 # ========================replace xml config========================
 echo "INFO: replace config in xml"
 HADOOP_TMP_DIR_SED=$(echo ${HADOOP_TMP_DIR} |sed -e 's/\//\\\//g' )
 DFS_NAME_DIR_SED=$(echo ${DFS_NAME_DIR} |sed -e 's/\//\\\//g' )
 DFS_DATA_DIR_SED=$(echo ${DFS_DATA_DIR} |sed -e 's/\//\\\//g' )
 
-sed -i "s/{master_domain}/${MASTER_DOMAIN}/g" $CUR_PATH/conf/core-site.xml
-sed -i "s/{HADOOP_TMP_DIR}/${HADOOP_TMP_DIR_SED}/g" $CUR_PATH/conf/core-site.xml
-sed -i "s/{master_domain}/${MASTER_DOMAIN}/g" $CUR_PATH/conf/hdfs-site.xml
-sed -i "s/{DFS_NAME_DIR}/${DFS_NAME_DIR_SED}/g" $CUR_PATH/conf/hdfs-site.xml
-sed -i "s/{DFS_DATA_DIR}/${DFS_DATA_DIR_SED}/g" $CUR_PATH/conf/hdfs-site.xml
-sed -i "s/{DFS_REPLICATION}/${DFS_REPLICATION}/g" $CUR_PATH/conf/hdfs-site.xml
-sed -i "s/{SECONDARY_NAME_NODE}/${SECONDARY_NAME_NODE}/g" $CUR_PATH/conf/hdfs-site.xml
-sed -i "s/{master_domain}/${MASTER_DOMAIN}/g" $CUR_PATH/conf/yarn-site.xml
-sed -i "s/{ZK_ADDRESS}/${ZK_ADDRESS}/g" $CUR_PATH/conf/yarn-site.xml
+sed -i "s/{master_domain}/${MASTER_DOMAIN}/g" $HADOOP_HOME/etc/hadoop/core-site.xml
+sed -i "s/{HADOOP_TMP_DIR}/${HADOOP_TMP_DIR_SED}/g" $HADOOP_HOME/etc/hadoop/core-site.xml
+sed -i "s/{master_domain}/${MASTER_DOMAIN}/g" $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+sed -i "s/{DFS_NAME_DIR}/${DFS_NAME_DIR_SED}/g" $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+sed -i "s/{DFS_DATA_DIR}/${DFS_DATA_DIR_SED}/g" $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+sed -i "s/{DFS_REPLICATION}/${DFS_REPLICATION}/g" $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+sed -i "s/{SECONDARY_NAME_NODE}/${SECONDARY_NAME_NODE}/g" $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+sed -i "s/{master_domain}/${MASTER_DOMAIN}/g" $HADOOP_HOME/etc/hadoop/yarn-site.xml
+sed -i "s/{ZK_ADDRESS}/${ZK_ADDRESS}/g" $HADOOP_HOME/etc/hadoop/yarn-site.xml
 
-# ========================replace config============================
-echo "INFO: Current work home is $CUR_PATH"
-# copy config files
-cp $CUR_PATH/conf/* $HADOOP_HOME/etc/hadoop
-# copy sh
-#cp $CUR_PATH/bash/*.sh $HADOOP_HOME/etc/hadoop
 
 # ========================Set java env==============================
 echo "INFO: export JAVA_HOME in hadoop-env.sh,yarn-env.sh"
@@ -108,15 +106,15 @@ then
     echo "export HDFS_SECONDARYNAMENODE_USER=root">> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
     echo "export YARN_RESOURCEMANAGER_USER=root">> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
     echo "export YARN_NODEMANAGER_USER=root">> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
-    echo "export HDFS_DATANODE_SECURE_USER=hdfs" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
-    echo "export HDFS_DATANODE_SECURE_USER=yarn" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+    #echo "export HDFS_DATANODE_SECURE_USER=hdfs" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+    #echo "export HDFS_DATANODE_SECURE_USER=yarn" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
 fi
 
 sed -i "s/# export JAVA_HOME=.*/export JAVA_HOME=$JAVA_HOME_SED/g" $HADOOP_HOME/etc/hadoop/yarn-env.sh
 # ========================Format Hadoop Namenode====================
 echo "INFO: Format Hadoop Namenode"
 
-#hdfs namenode -format
+hdfs namenode -format
 # ========================EXPORT PORTS==============================
 # echo "INFO: Finish install !!!"
 sudo firewall-cmd --permanent --add-port=8088/tcp

@@ -3,7 +3,7 @@
 # =======================load config ===============================
 source ./install.conf
 
-node_ip_arr=$(cat slaves.conf)
+node_ip_arr=$(cat nodes.conf)
 # ===========================remove old log======================
 rm -rf hadoop.log
 # ===========================install nodes=======================
