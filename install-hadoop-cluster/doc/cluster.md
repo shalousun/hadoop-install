@@ -2,11 +2,18 @@ hadoop分布式完全分布式安装(hadoop 3.0+)
 
 # 1.集群规划
 
-192.168.248.128 master  hadoop	namenode ressourcemanager
+机器名称|角色|详细信息
+---|---|---
+192.168.248.128|master|hadoop namenode ressourcemanager
 
-192.168.248.130 slave1  hadoop	datanode secondnamenode
+192.168.248.130|slave1|hadoop datanode secondnamenode
 
-192.168.248.133 slave2  hadoop	datanade
+192.168.248.133|slave2|hadoop datanade
+
+**注意：** 这里提供的是三个机器的完全分布式，如果需要更多的机器，多的机器也是作为`datanode`使用。
+安装完成启动后在各台机器上使用`jps`命令来检查时需要注意打印的信息要和自己规划的一致，例如在启动后
+使用`jps`命令并未发现`datanode`,则说明集群有问题，需要检查是否有重复安装数据未清理的显现。
+
 
 # 环境配置
 

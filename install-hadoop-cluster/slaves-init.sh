@@ -9,6 +9,8 @@ rm -rf hadoop.log
 # ===========================install nodes=======================
 for node_ip in $node_ip_arr
 do
+  echo "[INFO] Delete old install"
+  ssh root@${node_ip} "rm -rf ${HADOOP_INSTALL_DIR}/hadoop"
   echo "[INFO] Copy /etc/profile to node ${node_ip}"
   scp /etc/profile ${node_ip}:/etc/
 

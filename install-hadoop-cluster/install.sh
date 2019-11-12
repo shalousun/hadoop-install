@@ -66,7 +66,7 @@ then
 fi
 # ========================init worker===============================
 # delete old workers
-rm -rf workers
+rm -rf $CUR_PATH/conf/workers
 
 for node_ip in $node_ip_arr
 do
@@ -99,9 +99,19 @@ cp $CUR_PATH/conf/* $HADOOP_HOME/etc/hadoop
 echo "INFO: export JAVA_HOME in hadoop-env.sh,yarn-env.sh"
 # export java env in hadoop-env.sh and yarn-env.sh
 sed -i "s/# export JAVA_HOME=.*/export JAVA_HOME=$JAVA_HOME_SED/g" $HADOOP_HOME/etc/hadoop/hadoop-env.sh
-echo "export HDFS_DATANODE_USER=root">> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
-echo "export HDFS_NAMENODE_USER=root">> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
-echo "export HDFS_SECONDARYNAMENODE_USER=root">> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+
+if ! grep "set hadoop user" $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+then
+    echo "# set hadoop user" >> /etc/profile
+    echo "export HDFS_DATANODE_USER=root">> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+    echo "export HDFS_NAMENODE_USER=root">> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+    echo "export HDFS_SECONDARYNAMENODE_USER=root">> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+    echo "export YARN_RESOURCEMANAGER_USER=root">> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+    echo "export YARN_NODEMANAGER_USER=root">> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+    echo "export HDFS_DATANODE_SECURE_USER=hdfs" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+    echo "export HDFS_DATANODE_SECURE_USER=yarn" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+fi
+
 sed -i "s/# export JAVA_HOME=.*/export JAVA_HOME=$JAVA_HOME_SED/g" $HADOOP_HOME/etc/hadoop/yarn-env.sh
 # ========================Format Hadoop Namenode====================
 echo "INFO: Format Hadoop Namenode"
