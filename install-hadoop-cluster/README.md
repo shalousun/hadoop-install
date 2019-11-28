@@ -76,6 +76,7 @@ slave2
 ```
 # hdfs namenode -format
 ```
+一般只有初始化的时候才会执行`format`
 **启动dfs**
 
 启动NameNode 和 DataNode 守护进程
@@ -180,4 +181,4 @@ yarn: http://{master ip}:8088
 # sbin/stop-yarn.sh
 ```
 **注意：**
-启动和停止单个hdfs相关的进程使用的是"hadoop-daemon.sh"脚本，而启动和停止yarn使用的是"yarn-daemon.sh"脚本。
+启动和停止单个hdfs相关的进程使用的是`hadoop-daemon.sh`脚本，而启动和停止yarn使用的是`yarn-daemon.sh`脚本。
