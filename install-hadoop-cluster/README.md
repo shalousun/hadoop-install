@@ -95,7 +95,8 @@ $ sbin/start-yarn.sh
 ```
 **各节点状态查看**
 
-分别到master、slave1、slave2中使用jps查看服务状态，实例：
+分别到master、slave1、slave2中使用jps查看服务状态，如果查看各个服务器上显示的状态和安装规划不一致时，
+需要检查hadoop集群的配置或者是高可用协调软件(zookeeper)是否正常工作，实例：
 
 master机器
 ```
@@ -182,3 +183,37 @@ yarn: http://{master ip}:8088
 ```
 **注意：**
 启动和停止单个hdfs相关的进程使用的是`hadoop-daemon.sh`脚本，而启动和停止yarn使用的是`yarn-daemon.sh`脚本。
+
+# window上开发连接远程hadoop配置(开发关注)
+mac作为开发电脑连接hadoop比较简单，但是使用windows系统的开发者就不是那么容易了，需要安装一些必要的类库才能正常使用，
+因此这里主要介绍下windows系统下远程连接hadoop配置。
+
+## 配置环境变量
+官网下载hadoop包解压后配置环境变量：例如：
+
+```
+//设置一个HADOOP_HOME
+HADOOP_HOME=D:\hadoop\hadoop-3.2.1\hadoop-3.2.1
+//在path中添加hadoop bin执行路径
+%HADOOP_HOME%\bin
+```
+完成上述配置后可以在windows的cmd命令中检查hadoop的版本。
+```
+C:\Users\xxx>hadoop version
+Hadoop 3.2.1
+Source code repository https://gitbox.apache.org/repos/asf/hadoop.git -r b3cbbb467e22ea829b3808f4b7b01d07e0bf3842
+Compiled by rohithsharmaks on 2019-09-10T15:56Z
+Compiled with protoc 2.5.0
+From source with checksum 776eaf9eee9c0ffc370bcbc1888737
+This command was run using /D:/hadoop/hadoop-3.2.1/hadoop-3.2.1/share/hadoop/common/hadoop-common-3.2.1.jar
+```
+## 安装缺省类库
+配置完成了hadoop的环境变量后，参考官方文档或者网上的hdfs操作代码直接操作hdfs或者MapReduce等将会提示缺少Native库
+(winutils.exe和hadoop.dll),因此需要到github上下载和自己使用的hadoop使用的版本对应的库，[下载地址](https://github.com/steveloughran/winutils.git)
+
+1. 下载后将对应版本中bin目录里的winutils.exe和hadoop.dll拷贝到上面配置环境变量的官方库的bin中即可。
+
+2. 将winutils.exe和hadoop.dll也复制到`C:\Windows\System32`中。
+
+
+完成上面的配置后即可按照官方demo或者网上的代码实例连接到hadoop了。
